@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"log"
+	"os"
 	"os/exec"
 	"strings"
 )
@@ -19,11 +19,10 @@ var impls = [...]struct {
 
 func main() {
 	log.SetFlags(0)
-	flag.Parse()
-	if flag.NArg() != 1 {
+	if len(os.Args) != 2 {
 		log.Fatal("usage: starbug <prog>")
 	}
-	prog := flag.Arg(0)
+	prog := os.Args[1]
 	for _, impl := range impls {
 		path, err := exec.LookPath(impl.bin)
 		if err != nil {
