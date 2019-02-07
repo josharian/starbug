@@ -56,6 +56,7 @@ func main() {
 		iflags = iflags[:len(iflags):len(iflags)]
 		args := append(iflags, "-c", prog)
 		cmd := exec.Command(path, args...)
+		cmd.Env = append(os.Environ(), "TERM=dumb")
 		out, err := cmd.CombinedOutput()
 		rc := -1
 		if err == nil {
